@@ -1,4 +1,4 @@
-import snake_face_URIs from './snake_face_URIs';
+import snake_face_URIs from './snake_face_URIs.js';
 
 function game_init() {
     let interval = game_favicon_wait_animation();
