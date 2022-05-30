@@ -17,5 +17,5 @@ const dataURIs = [{ file: file_name, URI: data_URI }, ...]
 Usage in console:
 
 ```console
-    DIR_PATH=(relative path to folder of images) node img_to_dataURI.js
+    DIR_PATH=(relative path to folder of images) OUTPUT_NAME=(output file name) node img_to_dataURI.js
 ```
