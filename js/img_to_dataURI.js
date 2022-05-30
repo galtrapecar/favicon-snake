@@ -3,6 +3,7 @@ const path = require('path');
 const ImageDataURI = require('image-data-uri');
 
 const DIR_PATH = process.env.DIR_PATH;
+const OUTPUT_NAME = process.env.OUTPUT_NAME;
 
 (async () => {
 
@@ -29,7 +30,7 @@ const DIR_PATH = process.env.DIR_PATH;
     }
     
     function write_data() {
-        fs.writeFile('dataURIs.js', `const dataURIs = ${JSON.stringify(data)}`, status => {});
+        fs.writeFile(`${OUTPUT_NAME}.js`, `export default dataURIs = ${JSON.stringify(data)}`, status => {});
     }
 
 })()
