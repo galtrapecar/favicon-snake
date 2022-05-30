@@ -23,6 +23,7 @@ function game_animation_loop() {
 }
 
 function game_set_favicon(favicon_uri) {
+    console.log("Set icon.");
     let favicon_link = document.querySelector('[rel=icon]');
     favicon.setAttribute("href", favicon_uri);
 	history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
