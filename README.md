@@ -9,12 +9,10 @@ Inspirations and Credits:
 
 Node script loops through all files in the specified folder and returns an array of objects in a seperate file:
 
-dataURIs.jsm:
-
-[{
-    file: file_name,
-    URI: data_URI
-}, ...]
+dataURIs.jsm: 
+```javascript
+const dataURIs = [{ file: file_name, URI: data_URI }, ...]
+```
 
 ```console
     DIR_PATH=(relative path to folder of images) node img_to_dataURI.js
