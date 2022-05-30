@@ -5,15 +5,14 @@ function game_init() {
 }
 
 function game_favicon_wait_animation() {
-    let index;
+    let index = 0;
 
     let interval = setInterval(() => {
-        
         let favicon_uri = snake_face_URIs[index].URI;
         game_set_favicon(favicon_uri);
 
         index = (index == snake_face_URIs.length - 1) ? 0 : index + 1;
-    }, 500);
+    }, 200);
 
     return interval;
 }
@@ -24,7 +23,7 @@ function game_animation_loop() {
 
 function game_set_favicon(favicon_uri) {
     console.log("Set icon.");
-    let favicon_link = document.querySelector('[rel=icon]');
+    let favicon = document.querySelector('#favicon');
     favicon.setAttribute("href", favicon_uri);
 	history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
 }

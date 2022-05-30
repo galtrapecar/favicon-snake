@@ -30,7 +30,7 @@ const OUTPUT_NAME = process.env.OUTPUT_NAME;
     }
     
     function write_data() {
-        fs.writeFile(`${OUTPUT_NAME}.js`, `export default dataURIs = ${JSON.stringify(data)}`, status => {});
+        fs.writeFile(`${OUTPUT_NAME}.js`, `export default ${JSON.stringify(data)}`, status => {});
     }
 
 })()

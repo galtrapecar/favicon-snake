@@ -4,6 +4,7 @@ Snake Game Playable In Browser Tab Icon
 
 Inspirations and Credits:
 - Apple sprite inspired by Minecraft ( https://www.minecraft.net/en-us )
+- Favicon setting logic by Mashpoe : https://github.com/Mashpoe/favicon-dino-game/blob/master/index.html
 
 # USAGE FOR img_to_dataURI.js SCRIPT
 
@@ -11,7 +12,7 @@ Node script loops through all files in the specified folder and returns an array
 
 dataURIs.js: 
 ```javascript
-export default dataURIs = [{ file: file_name, URI: data_URI }, ...]
+export default [{ file: file_name, URI: data_URI }, ...]
 ```
 
 Usage in console:
