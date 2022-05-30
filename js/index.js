@@ -28,3 +28,5 @@ function game_set_favicon(favicon_uri) {
     favicon.setAttribute("href", favicon_uri);
 	history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
 }
+
+game_init();
