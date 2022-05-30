@@ -4,3 +4,18 @@ Snake Game Playable In Browser Tab Icon
 
 Inspirations and Credits:
 - Apple sprite inspired by Minecraft ( https://www.minecraft.net/en-us )
+
+# USAGE FOR img_to_dataURI.js SCRIPT
+
+Node script loops through all files in the specified folder and returns an array of objects in a seperate file:
+
+dataURIs.jsm:
+
+[{
+    file: file_name,
+    URI: data_URI
+}, ...]
+
+```console
+    DIR_PATH=(relative path to folder of images) node img_to_dataURI.js
+```
