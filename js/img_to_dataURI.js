@@ -29,7 +29,7 @@ const DIR_PATH = process.env.DIR_PATH;
     }
     
     function write_data() {
-        fs.writeFile('dataURIs.js', JSON.stringify(data), status => {});
+        fs.writeFile('dataURIs.js', `const dataURIs = ${JSON.stringify(data)}`, status => {});
     }
 
 })()
