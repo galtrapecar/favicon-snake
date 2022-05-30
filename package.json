@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/galtrapecar/favicon-snake/issues"
   },
-  "homepage": "https://github.com/galtrapecar/favicon-snake#readme",
-  "dependencies": {
-    "image-data-uri": "^2.0.1"
-  }
+  "homepage": "https://github.com/galtrapecar/favicon-snake#readme"
 }
