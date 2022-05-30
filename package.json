@@ -1,0 +1,22 @@
+{
+  "name": "snake.io",
+  "version": "1.0.0",
+  "description": "Snake Game Playable In Browser Tab Icon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galtrapecar/favicon-snake.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/galtrapecar/favicon-snake/issues"
+  },
+  "homepage": "https://github.com/galtrapecar/favicon-snake#readme",
+  "dependencies": {
+    "image-data-uri": "^2.0.1"
+  }
+}
