@@ -9,9 +9,9 @@ Inspirations and Credits:
 
 Node script loops through all files in the specified folder and returns an array of objects in a seperate file.
 
-dataURIs.jsm: 
+dataURIs.js: 
 ```javascript
-const dataURIs = [{ file: file_name, URI: data_URI }, ...]
+export default dataURIs = [{ file: file_name, URI: data_URI }, ...]
 ```
 
 Usage in console:
