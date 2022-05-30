@@ -7,7 +7,7 @@ Inspirations and Credits:
 
 # USAGE FOR img_to_dataURI.js SCRIPT
 
-Node script loops through all files in the specified folder and returns an array of objects in a seperate file:
+Node script loops through all files in the specified folder and returns an array of objects in a seperate file.
 
 dataURIs.jsm: 
 ```javascript
