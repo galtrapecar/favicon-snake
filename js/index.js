@@ -4,6 +4,8 @@ import snake_press_start_URIs from './snake_press_start_URIs.js';
 const pause = (delay) => new Promise(resolve => setTimeout(resolve, delay));
 
 const canvas = document.createElement('canvas');
+canvas.height = 16;
+canvas.width = 16;
 const context = canvas.getContext('2d');
 
 document.body.appendChild(canvas);
@@ -21,8 +23,10 @@ async function game_init() {
     game_waiting_animation_loop();
 }
 
-function game_waiting_animation_loop() {
+async function game_waiting_animation_loop() {
     while (true) {
+        await pause(1000);
+        await snake_blink();
         await pause(1000);
         await snake_blink();
         await pause(1000);
@@ -33,8 +37,11 @@ function game_waiting_animation_loop() {
 function game_set_favicon(favicon_uri) {
     console.log("Set icon.");
     let favicon = document.querySelector('#favicon');
-    favicon.setAttribute("href", favicon_uri);
-	history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
+    let newIcon = favicon.cloneNode(true);
+    newIcon.setAttribute("href", favicon_uri);
+    favicon.parentNode.replaceChild(newIcon, favicon);
+    //favicon.setAttribute("href", favicon_uri);
+	//history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
 }
 
 game_init();
@@ -58,6 +65,22 @@ async function snake_blink() {
 }
 
 async function snake_press_start() {
+    let URI = snake_press_start_URIs[0].URI;
+    let img = new Image();
+    let img_width = 360;
+
+    img.src = URI;
+
+    for (let i = 0; i < img_width; i++) {
+        let URI = canvas_draw_snake_press_start(img, i);
+        game_set_favicon(URI);
+        await pause(30);
+    }
     
     return;
+}
+
+function canvas_draw_snake_press_start(img, i) {
+    context.drawImage(img, i * -1, 0);
+    return canvas.toDataURL();
 }
