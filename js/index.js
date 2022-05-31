@@ -3,6 +3,11 @@ import snake_press_start_URIs from './snake_press_start_URIs.js';
 
 const pause = (delay) => new Promise(resolve => setTimeout(resolve, delay));
 
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+
+document.body.appendChild(canvas);
+
 // --------------------------------------------------------------
 //    ______       _       ____    ____  ________  
 //  .' ___  |     / \     |_   \  /   _||_   __  | 
@@ -53,10 +58,6 @@ async function snake_blink() {
 }
 
 async function snake_press_start() {
-    for (let i = 0; i < snake_face_URIs.length; i++) {
-        const URI = snake_face_URIs[i].URI;
-        game_set_favicon(URI);
-        await pause(200);
-    }
+    
     return;
 }
