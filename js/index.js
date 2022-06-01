@@ -1,5 +1,6 @@
 import snake_face_URIs from './snake_face_URIs.js';
 import snake_press_start_URIs from './snake_press_start_URIs.js';
+import snake_sink_URIs from './snake_sink_URIs.js';
 
 const pause = (delay) => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -8,7 +9,12 @@ canvas.height = 16;
 canvas.width = 16;
 const context = canvas.getContext('2d');
 
-document.body.appendChild(canvas);
+const canvas_scaled = document.createElement('canvas');
+canvas_scaled.height = 360;
+canvas_scaled.width = 360;
+const context_scaled = canvas.getContext('2d');
+
+document.body.appendChild(canvas_scaled);
 
 // --------------------------------------------------------------
 //    ______       _       ____    ____  ________  
@@ -30,7 +36,9 @@ async function game_waiting_animation_loop() {
         await pause(1000);
         await snake_blink();
         await pause(1000);
+        await snake_sink();
         await snake_press_start();
+        await snake_sink_reverse();
     }
 }
 
@@ -60,6 +68,24 @@ async function snake_blink() {
         const URI = snake_face_URIs[i].URI;
         game_set_favicon(URI);
         await pause(200);
+    }
+    return;
+}
+
+async function snake_sink() {
+    for (let i = 0; i < snake_sink_URIs.length; i++) {
+        const URI = snake_sink_URIs[i].URI;
+        game_set_favicon(URI);
+        await pause(100);
+    }
+    return;
+}
+
+async function snake_sink_reverse() {
+    for (let i = snake_sink_URIs.length - 1; i >= 0; i--) {
+        const URI = snake_sink_URIs[i].URI;
+        game_set_favicon(URI);
+        await pause(100);
     }
     return;
 }
