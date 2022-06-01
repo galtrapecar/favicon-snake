@@ -9,12 +9,14 @@ canvas.height = 16;
 canvas.width = 16;
 const context = canvas.getContext('2d');
 
-const canvas_scaled = document.createElement('canvas');
-canvas_scaled.height = 360;
-canvas_scaled.width = 360;
-const context_scaled = canvas.getContext('2d');
+// const canvas_scaled = document.createElement('canvas');
+// canvas_scaled.height = 360;
+// canvas_scaled.width = 360;
+// const context_scaled = canvas.getContext('2d');
 
-document.body.appendChild(canvas_scaled);
+document.body.appendChild(canvas);
+
+let waiting_flag = true;
 
 // --------------------------------------------------------------
 //    ______       _       ____    ____  ________  
@@ -25,12 +27,23 @@ document.body.appendChild(canvas_scaled);
 //  `._____.'|____| |____||_____||_____||________|
 // --------------------------------------------------------------
 
+let px = 8, py = 8;
+let tc = 16;
+let ax = 12, ay = 12;
+let vx = 0, vy = 0;
+let snake = [];
+let tail = 5;
+
+let snake_color = "#FFA8CA";
+
 async function game_init() {
     game_waiting_animation_loop();
+    document.addEventListener('keyup', game_handle_space_pressed);
 }
 
 async function game_waiting_animation_loop() {
-    while (true) {
+
+    while (waiting_flag) {
         await pause(1000);
         await snake_blink();
         await pause(1000);
@@ -40,16 +53,107 @@ async function game_waiting_animation_loop() {
         await snake_press_start();
         await snake_sink_reverse();
     }
+
+    return;
 }
 
 function game_set_favicon(favicon_uri) {
-    console.log("Set icon.");
     let favicon = document.querySelector('#favicon');
     let newIcon = favicon.cloneNode(true);
     newIcon.setAttribute("href", favicon_uri);
     favicon.parentNode.replaceChild(newIcon, favicon);
     //favicon.setAttribute("href", favicon_uri);
 	//history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
+}
+
+function game_handle_space_pressed(event) {
+    if (event.keyCode == 32) {
+        document.removeEventListener('keyup', game_handle_space_pressed);
+        game_start();
+    }
+}
+
+function game_start() {
+    waiting_flag = false;
+    document.addEventListener('keydown', game_handle_key_pressed);
+    setInterval(game_loop, 100);
+}
+
+function game_loop() {
+    px += vx;
+    py += vy;
+
+    if (px < 0) {
+        px = tc - 1;
+    }
+
+    if (px > tc - 1) {
+        px = 0;
+    }
+
+    if (py < 0) {
+        py = tc - 1;
+    }
+
+    if (py > tc - 1) {
+        py = 0;
+    }
+
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    console.log(JSON.stringify(snake));
+    console.log(px + '  ' + py);
+
+    context.fillStyle = snake_color;
+    for (let i = 0; i < snake.length; i++) {
+        context.fillRect(snake[i].x, snake[i].y, 1, 1);
+        if (snake[i].x == px && snake[i].y == py) {
+            tail = 5;
+        }
+    }
+
+    snake.push({x: px, y: py});
+    while (snake.length > tail)  { 
+        snake.shift();
+    }
+
+    if (ax == px && ay == py) {
+        tail++;
+        ax = Math.floor(Math.random() * tc);
+        ay = Math.floor(Math.random() * tc);
+    }
+
+    context.fillStyle = "red";
+    context.fillRect(ax, ay, 1, 1);
+
+    game_set_favicon(canvas.toDataURL());
+}
+
+function game_handle_key_pressed(event) {
+    switch (event.keyCode) {
+        case 65:
+            vx = -1; vy = 0;
+            break;
+
+        case 87:
+            vx = 0; vy = -1;
+            break;
+
+        case 68:
+            vx = 1; vy = 0;
+            break;
+
+        case 83:
+            vx = 0; vy = 1;
+            break;
+    }
+}
+
+function game_over() {
+    clearInterval(game_loop);
+    context.fillStyle = 'red';
+    context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 game_init();
@@ -64,24 +168,27 @@ game_init();
 // --------------------------------------------------------------
 
 async function snake_blink() {
+    if (!waiting_flag) return;
     for (let i = 0; i < snake_face_URIs.length; i++) {
         const URI = snake_face_URIs[i].URI;
-        game_set_favicon(URI);
+        if (waiting_flag) game_set_favicon(URI);
         await pause(200);
     }
     return;
 }
 
 async function snake_sink() {
+    if (!waiting_flag) return;
     for (let i = 0; i < snake_sink_URIs.length; i++) {
         const URI = snake_sink_URIs[i].URI;
-        game_set_favicon(URI);
+        if (waiting_flag) game_set_favicon(URI);
         await pause(100);
     }
     return;
 }
 
 async function snake_sink_reverse() {
+    if (!waiting_flag) return;
     for (let i = snake_sink_URIs.length - 1; i >= 0; i--) {
         const URI = snake_sink_URIs[i].URI;
         game_set_favicon(URI);
@@ -91,6 +198,7 @@ async function snake_sink_reverse() {
 }
 
 async function snake_press_start() {
+    if (!waiting_flag) return;
     let URI = snake_press_start_URIs[0].URI;
     let img = new Image();
     let img_width = 360;
@@ -107,6 +215,7 @@ async function snake_press_start() {
 }
 
 function canvas_draw_snake_press_start(img, i) {
+    if (!waiting_flag) return;
     context.drawImage(img, i * -1, 0);
     return canvas.toDataURL();
 }
