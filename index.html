@@ -11,6 +11,92 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+
+    <section class="main">
+        <div class="left">
+            <div class="left-inner">
+                <div class="title">FAVICON SNAKE</div>
+                <div class="subtitle">Inspired by favicon game projects like the Defender of the Favicon by <a href="http://www.p01.org/about/">Mathieu 'p01' Henri</a> 
+                    and Favicon Dino Game by <a href="https://github.com/Mashpoe/favicon-dino-game">Mashpoe</a>, Favicon Snake Game is a similar project that makes popular
+                    game genre "snake" playable in the favicon.
+                </div>
+                <div class="description">
+                    <div class="heading">About this project 💡</div>
+                    <div class="paragraph">
+                        The project was started in May of 2022 for a school assignment at the Faculty of Mathematics, Natural Sciences and Information Technologies.
+                        The assignment was simple i.e. create a snake game and no other details were specified, so I took the oppurtunity to take my mind off school
+                        and do some creative coding. 
+                        <div class="br"></div>
+                        I have been programming in JavaScript and doing web-dev for three years prior to taking this course at my university, so I wanted to do something
+                        more interesting. The result is a snake game, like the assignment specified, but it runs in the browser tab icon called a "favicon".
+                        <div class="br"></div>
+                        A big inspiration for the game was a project I found while looking for a method to animate a favicon for my portfolio website called Defender of the Favicon by <a href="http://www.p01.org/about/">Mathieu 'p01' Henri</a>.
+                        It lead me down a rabbit hole and I found another favicon game called Favicon Dino Game by a youtuber <a href="https://github.com/Mashpoe/favicon-dino-game">Mashpoe</a>.
+                        <div class="br"></div>
+                        The game runs in the HTML canvas, that gets converted to arrays of data: URIs and displayed as the site's favicon. The sprites were drawin in 
+                        Adobe Photoshop in 16 x 16 pixel resolution and converted to URIs by a Node.js library <a href="https://github.com/DiegoZoracKy/image-data-uri">img-data-uri.js</a> 
+                        by Diego ZoracKy.
+                        <div class="br"></div>
+                        Game's logic makes use of asynchronous JavaScript to run a seamless game loop from start screen to game over screen and repeats for endless gameplay.
+                        Big part of the snake code was done by an awesome game developer and youtuber <a href="https://pastebin.com/Z3zhb7cY">Chris DeLeon</a>.
+                        I wanted to improve on the code but I don't like reinventing the wheel so besides adding new functionality, big part of the code remains 
+                        the same as Chris'.
+                    </div>
+                    <div class="heading">About snake 🐍</div>
+                    <div class="paragraph">
+                        Assuming you don't already know snake, snake is a game genre that is comprised of a lot of different looking games.
+                        All snake games generally have similar gameplay, but some try to build on the idea and add new functionality.
+                        The player is a dot, a square or something similar and moves on the playing field while leaving behind a trail. 
+                        The shape resembles a snake hence the name of the game. Player's main objective is to collect or "eat" items, often red dots resembling apples,
+                        that increase the snake's length making it progressively more dificult to maneuver the snake. Player looses or "dies" if the head of the snake touches it's
+                        tail or the border of the screen.
+                        <div class="br"></div>
+                        Some games differ and add a looping game field that makes the snake able to move from the edge of the screen to the adjacent side. My implementation of snake is the looping type.
+                        There is a second gameplay variant, similar to the one previously mentioned, in which the player plays against an AI or other players and attempts to block others and make them run
+                        into the body of an existing snake and loose.
+                        <div class="br"></div>
+                        The snake I remember playing was on old Nokia phones from the 2000s onward, but the first snake game dates back to the arcade game Blockade, developed and published by Gremlin in 1976.
+                    </div>
+                    <div class="heading">Wrap up 📦</div>
+                    <div class="paragraph">
+                        This was an incredibly fun project to work on so a thank you goes to UP FAMNIT for making me code something I never would have otherwise.
+                        Maybe someday I will improve on this idea and make a bigger favicon game or something else to do with favicons entirely. But until that day we will have to do with
+                        existing favicon games.
+                        <div class="br"></div>
+                        - Gal Trapečar, 2022
+                    </div>
+                    <div class="heading">Other projects 🔗</div>
+                    <div class="paragraph">If you found this project fun you can check out my <a href="http://gal.trapecar.com">website</a> and maybe you will find something interesting.</div>
+                </div>
+
+                <div class="contact-bottom">
+                    <div class="contact-left">
+                    &copy; Gal Trapečar 2022
+                    </div>
+        
+                    <div class="center">
+                        <div class="cube-wrap">
+                            <div class="cube" id="cube">
+                                <div class="front"><div></div></div>
+                                <div class="leftt"><div></div></div>
+                                <div class="rightt"><div></div></div>
+                                <div class="back"><div></div></div>
+                                <div class="topp"><div></div></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="contact-right">
+                        <p style="cursor: pointer" onclick="window.open('http://gal.trapecar.com')">gal.trapecar.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div id="canvas-wrapper"></div>
+        </div>
+    </section>
     
 
 <script type="module" src="./js/index.js"></script>

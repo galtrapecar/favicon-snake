@@ -2,6 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+    font-family: var(--ff);
 }
 
 :root {
@@ -11,6 +12,7 @@
     --clr-bg-dark:       #1E1E1E;
     --clr-font:          #fff;
     --clr-font-accent:   #060606;
+    --clr-anchor:        #61D0FF;
     --ff:                'Quicksand';
     --ff2:               'Noto Sans';
 
@@ -20,6 +22,16 @@
     --clr-hearts-2:      #F2A0C6;
     --clr-hearts-3:      #FFA8CA;
     --clr-hearts-4:      #ffffff;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url(../fonts/Quicksand-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url(../fonts/NotoSans-Bold.ttf);
 }
 
 html {
@@ -44,4 +56,212 @@ canvas {
     image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
     image-rendering: pixelated;                 /* Awesome future-browsers       */
     -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+}
+
+a {
+    color: var(--clr-anchor);
+    font-weight: 600;
+}
+
+a:active {
+    color: var(--clr-anchor);
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.main .left {
+    overflow-y: scroll;
+}
+
+.main .left-inner {
+    position: relative;
+    width: 50vw;
+    min-height: 100%;
+    background-color: var(--clr-font);
+    padding: 0 20px;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main .left .title {
+    width: 100%;
+    font-family: var(--ff2);
+    font-weight: bold;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main .left .subtitle {
+    width: 90%;
+}
+
+.main .left .description {
+    width: 90%;
+}
+
+.main .left .description .heading {
+    margin: 20px 0;
+    margin-top: 40px;
+    font-weight: bold;
+    font-family: var(--ff2);
+    font-size: 2rem;
+    text-transform: uppercase;
+    transform: translateX(-15px);
+}
+
+.main .left .description .br {
+    margin: 10px 0;
+}
+
+.main .right {
+    width: 50vw;
+    height: 100%;
+}
+
+.contact-bottom {
+    position: absolute;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    background-color: var(--clr-bg-darker);
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+}
+
+.contact-bottom .center {
+    perspective: 600px;
+}
+
+.cube-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    display: grid;
+    place-content: center;
+}
+
+.cube {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    transform-style: preserve-3d;
+    animation: spin 10s linear infinite;
+}
+
+.cube .front,
+.cube .left,
+.cube .right,
+.cube .back,
+.cube .topp,
+.cube .bottomm,
+.cube div div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.cube div div {
+    animation: contact-cube-color 3s linear infinite;
+}
+
+.cube .front {
+    transform: translateZ(20px);
+}
+
+.cube .leftt {
+    transform-origin: 0 50%;
+    transform: translateZ(20px) rotateY(90deg);
+}
+
+.cube .rightt {
+    transform-origin: 0 50%;
+    transform: translateZ(20px) translateX(100%) rotateY(90deg);
+}
+
+.cube .back {
+    transform-origin: 0 50%;
+    transform: translateZ(-40px) translateZ(20px);
+}
+
+.cube .topp {
+    transform-origin: 0 50%;
+    transform: translateY(-50%) translateZ(0) rotateX(90deg);
+}
+
+.cube .bottom {
+    transform-origin: 0 50%;
+    transform: translateY(50%) translateZ(0px) rotateX(90deg);
+}
+
+.contact-bottom .contact-left {
+    color: var(--clr-font);
+    align-self: center;
+    text-align: right;
+    font-size: .7rem;
+}
+
+.contact-bottom .contact-right {
+    color: var(--clr-font);
+    align-self: center;
+    text-align: left;
+    font-size: .7rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }    
+}
+
+@keyframes contact-cube-color {
+    0% {
+        border: 1.5px solid var(--clr-hearts-01);
+    }
+
+    16.6% {
+        border: 1.5px solid var(--clr-hearts-0);
+    }
+
+
+    33.3% {
+        border: 1.5px solid var(--clr-hearts-2);
+    }
+
+
+    49.8% {
+        border: 1.5px solid var(--clr-hearts-4);
+    }
+
+
+    66.4% {
+        border: 1.5px solid var(--clr-hearts-2);
+    }
+
+
+    83% {
+        border: 1.5px solid var(--clr-hearts-0);
+    }
+
+
+    100% {
+        border: 1.5px solid var(--clr-hearts-01);
+    }
+
 }

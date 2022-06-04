@@ -9,7 +9,7 @@ canvas.height = 16;
 canvas.width = 16;
 const context = canvas.getContext('2d');
 
-document.body.appendChild(canvas);
+document.getElementById('canvas-wrapper').appendChild(canvas);
 
 let waiting_flag = true;
 
@@ -39,6 +39,7 @@ async function game_init() {
 async function game_waiting_animation_loop() {
 
     while (waiting_flag) {
+        await snake_sink_reverse();
         await pause(1000);
         await snake_blink();
         await pause(1000);
@@ -46,7 +47,6 @@ async function game_waiting_animation_loop() {
         await pause(1000);
         await snake_sink();
         await snake_press_start();
-        await snake_sink_reverse();
     }
 
     return;
