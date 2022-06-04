@@ -3,10 +3,11 @@
 Snake Game Playable In Browser Tab Icon
 
 Inspirations and Credits:
-- Apple sprite inspired by Minecraft ( https://www.minecraft.net/en-us )
+- Apple sprite inspired by Minecraft : https://www.minecraft.net/en-us
 - ASCII Fonts by : https://www.coolgenerator.com/ascii-text-generator
 - Favicon setting logic by Mashpoe : https://github.com/Mashpoe/favicon-dino-game/blobmaster/index.html
 - Simple Snake game logic by Chris DeLeon : https://pastebin.com/Z3zhb7cY
+- Canvas Scaling CSS by Benno Daenen : https://itch.io/jam/lowrezjam2016/topic/19730/solved-html5-canvas-scaling-nearest-neighbor-no-blur
 
 # USAGE FOR img_to_dataURI.js SCRIPT
 
