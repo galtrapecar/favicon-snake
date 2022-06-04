@@ -9,11 +9,6 @@ canvas.height = 16;
 canvas.width = 16;
 const context = canvas.getContext('2d');
 
-// const canvas_scaled = document.createElement('canvas');
-// canvas_scaled.height = 360;
-// canvas_scaled.width = 360;
-// const context_scaled = canvas.getContext('2d');
-
 document.body.appendChild(canvas);
 
 let waiting_flag = true;
@@ -172,6 +167,7 @@ async function snake_blink() {
     for (let i = 0; i < snake_face_URIs.length; i++) {
         const URI = snake_face_URIs[i].URI;
         if (waiting_flag) game_set_favicon(URI);
+        canvas_draw_image(URI);
         await pause(200);
     }
     return;
@@ -182,6 +178,7 @@ async function snake_sink() {
     for (let i = 0; i < snake_sink_URIs.length; i++) {
         const URI = snake_sink_URIs[i].URI;
         if (waiting_flag) game_set_favicon(URI);
+        canvas_draw_image(URI);
         await pause(100);
     }
     return;
@@ -192,6 +189,7 @@ async function snake_sink_reverse() {
     for (let i = snake_sink_URIs.length - 1; i >= 0; i--) {
         const URI = snake_sink_URIs[i].URI;
         game_set_favicon(URI);
+        canvas_draw_image(URI);
         await pause(100);
     }
     return;
@@ -218,4 +216,11 @@ function canvas_draw_snake_press_start(img, i) {
     if (!waiting_flag) return;
     context.drawImage(img, i * -1, 0);
     return canvas.toDataURL();
+}
+
+function canvas_draw_image(img) {
+    console.log("Canvas draw call");
+    let image = new Image();
+    image.src = img;
+    context.drawImage(image, 0, 0);
 }
