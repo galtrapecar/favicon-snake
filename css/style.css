@@ -39,14 +39,14 @@ html {
 }
 
 body {
-	background-color: var(--clr-bg-dark);
+	background-color: var(--clr-bg-darkish);
     height: 100vh;
     display: grid;
     place-content: center;
 }
 
 canvas {
-    border: var(--clr-hearts-2) 1px solid;
+    border: var(--clr-font) 3px solid;
     width: 360px;
     height: 360px;
 
@@ -124,8 +124,59 @@ a:active {
 }
 
 .main .right {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50vw;
     height: 100%;
+}
+
+.main .right .description {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main .right .description .title {
+    width: 100%;
+    text-align: center;
+    color: var(--clr-font);
+    font-size: 5rem;
+    font-family: var(--ff2);
+    margin-top: 20px;
+}
+
+.main .right .description .controls {
+    width: 70%;
+}
+
+.main .right .description .controls .line {
+    position: relative;
+    width: 70%;
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: var(--clr-font);
+}
+
+.main .right .description .controls .line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%) translateX(-25px);
+    width: .6rem;
+    height: .6rem;
+    border-radius: 50%;
+    background-color: var(--clr-hearts-3);
+}
+
+.main .right .description .wrapup {
+    color: var(--clr-font);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .contact-bottom {
@@ -133,7 +184,7 @@ a:active {
     bottom: 0;
     height: 70px;
     width: 100%;
-    background-color: var(--clr-bg-darker);
+    background-color: var(--clr-bg-darkish);
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
 }
