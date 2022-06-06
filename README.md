@@ -10,6 +10,7 @@ Inspirations and Credits:
 - Canvas Scaling CSS by Benno Daenen : https://itch.io/jam/lowrezjam2016/topic/19730/solved-html5-canvas-scaling-nearest-neighbor-no-blur
 - Noto Sans font by Google : https://fonts.google.com/noto/specimen/Noto+Sans
 - Quicksand font by Google : https://fonts.google.com/specimen/Quicksand
+- Thank you to my gf for drawing the dying snake animation💜
 
 # USAGE FOR img_to_dataURI.js SCRIPT
 
