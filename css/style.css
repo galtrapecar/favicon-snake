@@ -133,6 +133,27 @@ a:active {
     height: 100%;
 }
 
+.main .right .contacts {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 35px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.main .right .contacts .github,
+.main .right .contacts .website {
+    width: 35px;
+    height: 35px;
+}
+
+.main .right .contacts .github svg,
+.main .right .contacts .website svg {
+    fill: var(--clr-font);
+}
+
 .main .right .description {
     width: 90%;
     display: flex;
