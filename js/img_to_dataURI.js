@@ -12,6 +12,8 @@ const OUTPUT_NAME = process.env.OUTPUT_NAME;
     fs.readdir(DIR_PATH, (error, files) => {
         if (error) process.exit(1);
 
+        console.log(files);
+
         files.forEach(async (file, index) => {
             let res = await get_data_uri(file);
             let res_object = {file : file, URI : res}
@@ -26,6 +28,7 @@ const OUTPUT_NAME = process.env.OUTPUT_NAME;
     }
     
     async function modify_data(data_to_add) {
+        console.log(`Adding data URI for file: ${data_to_add['file']}`);
         data.push(data_to_add);
     }
     
