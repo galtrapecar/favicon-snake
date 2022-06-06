@@ -164,6 +164,19 @@ function game_over() {
     snake_die();
 }
 
+function game_reset_params() {
+    waiting_flag = true;
+    snake_dying_flag = false;
+    first_key_press_flag = false;
+
+    px = 8, py = 8;
+    tc = 16;
+    ax = 12, ay = 12;
+    vx = 0, vy = 0;
+    snake = [];
+    tail = 5;
+}
+
 game_init();
 
 // --------------------------------------------------------------
@@ -180,8 +193,8 @@ async function snake_blink() {
     for (let i = 0; i < snake_face_URIs.length; i++) {
         const URI = snake_face_URIs[i].URI;
         if (!waiting_flag) throw 400;
-        game_set_favicon(URI);
-        canvas_draw_image(URI);  
+        await canvas_draw_image(URI); 
+        game_set_favicon(URI); 
         await pause(200);
     }
     return;
@@ -192,8 +205,8 @@ async function snake_sink() {
     for (let i = 0; i < snake_sink_URIs.length; i++) {
         const URI = snake_sink_URIs[i].URI;
         if (!waiting_flag) throw 400;
-        game_set_favicon(URI);
-        canvas_draw_image(URI);  
+        await canvas_draw_image(URI); 
+        game_set_favicon(URI);  
         await pause(100);
     }
     return;
@@ -204,8 +217,8 @@ async function snake_sink_reverse() {
     for (let i = snake_sink_URIs.length - 1; i >= 0; i--) {
         const URI = snake_sink_URIs[i].URI;
         if (!waiting_flag) throw 400;
-        game_set_favicon(URI);
-        canvas_draw_image(URI);  
+        await canvas_draw_image(URI); 
+        game_set_favicon(URI);  
         await pause(100);
     }
     return;
@@ -214,22 +227,24 @@ async function snake_sink_reverse() {
 async function snake_die_sink() {
     for (let i = 0; i < snake_die_URIs.length; i++) {
         const URI = snake_die_URIs[i].URI;
+        await canvas_draw_image(URI);
         game_set_favicon(URI);
-        canvas_draw_image(URI);
         console.log("Snake die step" + (i + 1));
-        await pause(100);
+        if (i == 0) await pause(3000);
+        if (i != 0) await pause(100);
     }
     return;
 }
 
 async function snake_die() {
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
     const URI = snake_die_URIs[0].URI;
+    await canvas_draw_image(URI);
     game_set_favicon(URI);
-    canvas_draw_image(URI);
-    await pause(2000);
     await snake_die_sink();
-    await pause(5000);
-    waiting_flag = true;
+    await pause(3000);
+    game_reset_params();
     game_init();
     return;
 }
@@ -259,8 +274,14 @@ function canvas_draw_snake_press_start(img, i) {
 }
 
 function canvas_draw_image(img) {
-    console.log("Canvas draw call");
-    let image = new Image();
-    image.src = img;
-    context.drawImage(image, 0, 0);
+    let promise = new Promise(resolve => {
+        console.log("Canvas draw call");
+        let image = new Image();
+        image.onload = function(){
+            context.drawImage(image, 0, 0);
+            resolve();
+        };
+        image.src = img;
+    })
+    return promise;
 }
