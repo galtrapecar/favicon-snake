@@ -36,6 +36,7 @@
 
 html {
 	background-color: var(--clr-bg-darker);
+    overflow: hidden;
 }
 
 body {

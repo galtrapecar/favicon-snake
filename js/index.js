@@ -1,6 +1,7 @@
 import snake_face_URIs from './snake_face_URIs.js';
 import snake_press_start_URIs from './snake_press_start_URIs.js';
 import snake_sink_URIs from './snake_sink_URIs.js';
+import snake_die_URIs from './snake_die_URIs.js';
 
 const pause = (delay) => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -12,6 +13,10 @@ const context = canvas.getContext('2d');
 document.getElementById('canvas-wrapper').appendChild(canvas);
 
 let waiting_flag = true;
+let snake_dying_flag = false;
+let first_key_press_flag = false;
+
+let game_interval;
 
 // --------------------------------------------------------------
 //    ______       _       ____    ____  ________  
@@ -32,6 +37,8 @@ let tail = 5;
 let snake_color = "#FFA8CA";
 
 async function game_init() {
+    console.log("Game initialized.");
+    snake_dying_flag = false;
     game_waiting_animation_loop();
     document.addEventListener('keyup', game_handle_space_pressed);
 }
@@ -71,7 +78,7 @@ function game_handle_space_pressed(event) {
 function game_start() {
     waiting_flag = false;
     document.addEventListener('keydown', game_handle_key_pressed);
-    setInterval(game_loop, 100);
+    game_interval = setInterval(game_loop, 130);
 }
 
 function game_loop() {
@@ -97,14 +104,16 @@ function game_loop() {
     context.fillStyle = 'black';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    console.log(JSON.stringify(snake));
-    console.log(px + '  ' + py);
-
     context.fillStyle = snake_color;
     for (let i = 0; i < snake.length; i++) {
         context.fillRect(snake[i].x, snake[i].y, 1, 1);
         if (snake[i].x == px && snake[i].y == py) {
             tail = 5;
+            console.log(first_key_press_flag);
+            if (first_key_press_flag && !snake_dying_flag) {
+                game_over();
+                return;
+            }
         }
     }
 
@@ -128,27 +137,31 @@ function game_loop() {
 function game_handle_key_pressed(event) {
     switch (event.keyCode) {
         case 65:
+            first_key_press_flag = true;
             vx = -1; vy = 0;
             break;
 
         case 87:
+            first_key_press_flag = true;
             vx = 0; vy = -1;
             break;
 
         case 68:
+            first_key_press_flag = true;
             vx = 1; vy = 0;
             break;
 
         case 83:
+            first_key_press_flag = true;
             vx = 0; vy = 1;
             break;
     }
 }
 
 function game_over() {
-    clearInterval(game_loop);
-    context.fillStyle = 'red';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    snake_dying_flag = true;
+    clearInterval(game_interval);
+    snake_die();
 }
 
 game_init();
@@ -163,35 +176,61 @@ game_init();
 // --------------------------------------------------------------
 
 async function snake_blink() {
-    if (!waiting_flag) return;
+    if (!waiting_flag) throw 400;
     for (let i = 0; i < snake_face_URIs.length; i++) {
         const URI = snake_face_URIs[i].URI;
-        if (waiting_flag) game_set_favicon(URI);
-        canvas_draw_image(URI);
+        if (!waiting_flag) throw 400;
+        game_set_favicon(URI);
+        canvas_draw_image(URI);  
         await pause(200);
     }
     return;
 }
 
 async function snake_sink() {
-    if (!waiting_flag) return;
+    if (!waiting_flag) throw 400;
     for (let i = 0; i < snake_sink_URIs.length; i++) {
         const URI = snake_sink_URIs[i].URI;
-        if (waiting_flag) game_set_favicon(URI);
-        canvas_draw_image(URI);
+        if (!waiting_flag) throw 400;
+        game_set_favicon(URI);
+        canvas_draw_image(URI);  
         await pause(100);
     }
     return;
 }
 
 async function snake_sink_reverse() {
-    if (!waiting_flag) return;
+    if (!waiting_flag) throw 400;
     for (let i = snake_sink_URIs.length - 1; i >= 0; i--) {
         const URI = snake_sink_URIs[i].URI;
+        if (!waiting_flag) throw 400;
         game_set_favicon(URI);
-        canvas_draw_image(URI);
+        canvas_draw_image(URI);  
         await pause(100);
     }
+    return;
+}
+
+async function snake_die_sink() {
+    for (let i = 0; i < snake_die_URIs.length; i++) {
+        const URI = snake_die_URIs[i].URI;
+        game_set_favicon(URI);
+        canvas_draw_image(URI);
+        console.log("Snake die step" + (i + 1));
+        await pause(100);
+    }
+    return;
+}
+
+async function snake_die() {
+    const URI = snake_die_URIs[0].URI;
+    game_set_favicon(URI);
+    canvas_draw_image(URI);
+    await pause(2000);
+    await snake_die_sink();
+    await pause(5000);
+    waiting_flag = true;
+    game_init();
     return;
 }
 
@@ -204,6 +243,7 @@ async function snake_press_start() {
     img.src = URI;
 
     for (let i = 0; i < img_width; i++) {
+        if (!waiting_flag) return;
         let URI = canvas_draw_snake_press_start(img, i);
         game_set_favicon(URI);
         await pause(30);
