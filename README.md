@@ -3,7 +3,7 @@
 Favicon Snake 🐍
 
 <p align="center">
-  <img width="10vw" src="./img/gif.gif" alt="gif"/>
+  <img width="300px" src="./img/gif.gif" alt="gif"/>
 </p>
 
 
