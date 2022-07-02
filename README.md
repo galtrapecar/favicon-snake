@@ -2,6 +2,8 @@
 
 Favicon Snake 🐍
 
+Preview at: https://htmlpreview.github.io/?https://raw.githubusercontent.com/galtrapecar/favicon-snake/main/index.html
+
 Inspirations and Credits:
 Code References:
 - Favicon setting logic by Mashpoe : https://github.com/Mashpoe/favicon-dino-game/blobmaster/index.html
