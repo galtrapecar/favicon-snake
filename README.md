@@ -2,7 +2,10 @@
 
 Favicon Snake 🐍
 
-![gif](./img/gif.gif)
+<p align="center">
+  <img src="./img/gif.gif" alt="gif"/>
+</p>
+
 
 Preview at: https://htmlpreview.github.io/?https://raw.githubusercontent.com/galtrapecar/favicon-snake/main/index.html
 
