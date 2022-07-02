@@ -2,6 +2,8 @@
 
 Favicon Snake 🐍
 
+!(Gif Preview)[/img/gif.gif]
+
 Preview at: https://htmlpreview.github.io/?https://raw.githubusercontent.com/galtrapecar/favicon-snake/main/index.html
 
 Inspirations and Credits:
